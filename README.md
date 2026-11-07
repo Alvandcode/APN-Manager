@@ -62,6 +62,9 @@ Contributions are welcome! Opening a pull request — bug fixes, validation impr
 - 📶 خواندن کد شبکه سیم‌کارت (MCC+MNC) — بدون هیچ مجوز لازم.
 - 🌗 پشتیبانی از تم روشن/تاریک و رابط فارسی/انگلیسی.
 - 🖥️ استودیوی وب (GitHub Pages) برای ساخت و دانلود `.apnpack`.
+- 🌐 **وب پنل در دسترس است:** [https://alvandcode.github.io/APN-Manager/](https://alvandcode.github.io/APN-Manager/) — تمام کاربران می‌توانند بدون نصب اپلیکیشن، پروفایل را بساز و دانلود کنند.
+
+- 🌐 وب پنل اینترنت در دسترس است: [https://alvandcode.github.io/APN-Manager/](https://alvandcode.github.io/APN-Manager/)
 
 ### نحوه کار
 ۱. پروفایل جدید بساز یا وارد کن.
