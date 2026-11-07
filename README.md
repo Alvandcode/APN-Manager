@@ -1,54 +1,134 @@
 # APN Manager
 
-Persian/English Android APN profile helper + static web profile builder.
+**APN Manager** — helper مدرن و محلی برای مدیریت پروفایل اینترنت در اندروید، همراه با استودیوی وب استاتیک برای ساخت و اعتبارسنجی فایل‌های `.apnpack`.
 
-## Current v1 scope
-- Android app (Kotlin + Jetpack Compose), supporting Android 7.0 (API 24) through Android 15 (API 35).
-- Import `.apnpack` JSON profiles through Android Sharesheet/file manager.
-- Validate profile structure and key fields locally.
-- Open Android APN settings for user-assisted registration.
-- Light/dark theme and Persian/English app UI.
-- Static web panel to create and download `.apnpack` files.
-- GitHub Actions builds a debug APK on every push and uploads it as an artifact.
+> 🇮🇷 این پروژه به فارسی و 🇬🇧 English به‌صورت دو زبانه (bilingual) ارائه می‌شود.
 
-## Important Android limitation
-Ordinary third-party apps cannot write carrier APN records directly. The app therefore does not claim to install APNs silently. It validates the imported profile and opens `Settings.ACTION_APN_SETTINGS`; the user completes saving in system settings. Device manufacturers and Android versions may hide or change this settings screen.
+[![Build Android APK](https://github.com/Alvandcode/APN-Manager/actions/workflows/android-build.yml/badge.svg)](https://github.com/Alvandcode/APN-Manager/actions/workflows/android-build.yml)
+[![Release](https://img.shields.io/github/v/release/Alvandcode/APN-Manager)](https://github.com/Alvandcode/APN-Manager/releases/latest)
+[![Android](https://img.shields.io/badge/Android-7.0%20%7C%2015-3DDC84?style=flat&logo=android)](https://developer.android.com/about/versions/15)
 
-The app reads only the SIM network code (MCC + MNC) through `TelephonyManager.getSimOperator()`, which requires no Android permission at all. Consequently the app requests no permissions whatsoever: no phone-state, location, SMS, contacts, or internet permission, and no phone number, IMEI or IMSI is ever read or stored. Universal automatic SIM-carrier selection is still confirmed by the user; only the network code is shown as a helper.
+---
 
-## Build on GitHub (phone-friendly)
-1. Create a GitHub repository named `APN-Manager`.
-2. Upload all files and folders from this project to the repository root.
-3. Open **Actions** and enable workflows if GitHub asks.
-4. Push any change or run **Build Android APK** from Actions > Run workflow.
-5. Open the completed workflow run and download **APN-Manager-debug** from Artifacts.
-6. Extract the ZIP; install `app-debug.apk` on a test phone. Android may ask to allow installation from the file manager.
+## 🇬🇧 English
 
-## Publish the web panel
-Enable GitHub Pages for the repository, using the `main` branch and `/web-panel` as the publishing folder if supported by repository Pages settings. If Pages does not offer a subfolder, place/copy the contents of `web-panel` into a `docs/` folder and select `/docs`.
+### Overview
+**APN Manager** is a privacy-first companion for Android mobile-data APN (Access Point Name) profiles. It lets you create, validate, import and export portable `.apnpack` profile files — entirely on your device or in a static web page — before you hand the values to the official carrier APN settings screen.
 
-## Profile format
-A `.apnpack` file is JSON with `format: "apnpack"` and `version: 1`. See `apn-format/example.apnpack` and `apn-format/schema.json`. Use only APN values verified by the relevant carrier. The example APN is deliberately a placeholder.
+⚠️ **Important Android limitation:** ordinary third-party apps cannot write carrier APN records directly. APN Manager therefore never claims to install APNs silently. It validates the imported profile and opens `Settings.ACTION_APN_SETTINGS`; the user completes saving in system settings.
 
-Both the app and the web panel enforce the same validation rules as the schema: name (1–80 chars), APN (1–100 chars, letters/digits/dots/dashes/underscores), optional MCC (3 digits) and MNC (2–3 digits), lowercase APN-type tokens, protocol `IPV4`/`IPV6`/`IPV4V6`, auth type `NONE`/`PAP`/`CHAP`/`PAP_OR_CHAP`, proxy limited to hostname-safe characters, and port between 1 and 65535. Imported files are validated locally with a 256 KB size limit.
+### Features
+- 📱 **Android app** (Kotlin + Jetpack Compose) supporting **Android 7.0 (API 24) – Android 15 (API 35)**.
+- 📥 **Import** `.apnpack` JSON profiles through Android Sharesheet / file manager.
+- 🔍 **Local validation** of the profile structure and key fields (format, version, required fields, MCC/MNC, APN type, protocol, auth type, proxy, port).
+- ⚡ **Open Android APN settings** (`ACTION_APN_SETTINGS`) for user-assisted saving.
+- 📶 Reads the **SIM network code** (MCC + MNC) as a convenience helper — requires **no Android permission**.
+- 🌗 **Light/dark theme** and **Persian/English** UI.
+- 🖥️ **Static web panel** (GitHub Pages): create, validate and download `.apnpack` files.
 
-## Build locally
-The repository includes a Gradle 8.9 wrapper. On Linux/macOS make it executable once (`chmod +x gradlew` or `git update-index --chmod=+x gradlew`) and run:
+### How it works
+1. Create or import a `.apnpack` profile.
+2. App (or web panel) validates the profile locally.
+3. App opens Android's APN settings screen; you enter and save the values.
+4. Final persistence happens through the device settings.
 
-```
+### Security & Privacy
+- Zero Android permissions are requested.
+- Local parsing; no account, no analytics, no remote fetch, no network permission.
+- Profile files are treated as untrusted input; no executable content is accepted.
+
+### Build
+- The repository ships a **Gradle 8.9 wrapper**.
+- GitHub Actions (`Build Android APK`) builds a debug APK on every push and publishes it to the **`latest` release**.
+- Debug APK is for testing; a release APK should be signed with a private release key.
+
+### Contribute
+Contributions are welcome! Opening a pull request — bug fixes, validation improvements, translations, tests — is appreciated.
+
+---
+
+## 🇮🇷 به فارسی
+
+### معرفی
+**APN Manager** یک دستیار محلی و حریم‌خصوصی‌محور برای مدیریت پروفایل اینترنت در اندروید است و همراه با استودیوی وب استاتیک، برای ساخت، اعتبارسنجی و صادر کردن فایل‌های پروفایل قابل حمل `.apnpack` کاربرد دارد.
+
+⚠️ **محدودیت مهم اندروید:** اپلیکیشن‌های عادی سوم‌تایی قادر به نوشتن مستقیم رکوردهای APN سیستم نیستند. بنابراین این اپلیکیشن ادعای نصب ناگهانی APN را نمی‌زند؛ ابتدا پروفایل را بررسی می‌کند و سپس صفحه تنظیمات APN سیستم را باز می‌کند و کاربر در نهایت مقادیر را ذخیره می‌کند.
+
+### امکانات
+- 📱 اپلیکیشن اندروید (Kotlin + Jetpack Compose) با پشتیبانی از **اندروید ۷ تا اندروید ۱۵**.
+- 📥 واردسازی فایل `.apnpack` از طریق سوییفت گوشی یا فایل‌مدیریت‌ر.
+- 🔍 اعتبارسنجی محلی ساختار و فیلدهای کلیدی پروفایل.
+- ⚡ باز کردن تنظیمات APN سیستم برای ثبت کاربرانه.
+- 📶 خواندن کد شبکه سیم‌کارت (MCC+MNC) — بدون هیچ مجوز لازم.
+- 🌗 پشتیبانی از تم روشن/تاریک و رابط فارسی/انگلیسی.
+- 🖥️ استودیوی وب (GitHub Pages) برای ساخت و دانلود `.apnpack`.
+
+### نحوه کار
+۱. پروفایل جدید بساز یا وارد کن.
+۲. اپلیکیشن/استودیو اعتبارسنجی را انجام می‌دهد.
+۳. اپلیکیشن تنظیمات APN را باز می‌کند و مقادیر را کاربر وارد و ذخیره می‌کند.
+۴. در نهایت ذخیره از طریق تنظیمات سیستم انجام می‌شود.
+
+### امنیت و حریم خصوصی
+- هیچ مجوزی از سمت کاربر خواسته نمی‌شود.
+- پردازش محلی و بدون نیاز به حساب/آنالیتیک/فیچر رادیو.
+- فایل‌های پروفایل به‌عنوان ورودی غیرقابل اعتماد در نظر گرفته می‌شوند.
+
+### بیلد
+- مخزن شامل **Gradle wrapper نسخه ۸.۹** است.
+- GitHub Actions در هر push به `main`, APK دیباگ بسازد و در **Release با نام `latest`** منتشر کند.
+- APK دیباگ فقط برای تست است؛ APK ریسِل باید با کلید خصوصی امضا شود.
+
+---
+
+## 🚀 Getting Started / شروع سریع
+
+```bash
+# Download the latest APK from:
+# https://github.com/Alvandcode/APN-Manager/releases/latest/download/APN-Manager.apk
+
+# Or download from the Releases page:
+# https://github.com/Alvandcode/APN-Manager/releases
+
+# Build locally (requires JDK 17 + Android SDK 35):
 ./gradlew assembleDebug
 ```
 
+**For contributors / برای مشارکت‌کنندگان:**
 
-## Security and privacy
-- Profile parsing is local.
-- No account, analytics, or remote profile fetch is included.
-- No sensitive Android permissions are requested.
-- Treat profile files as untrusted input; do not include executable code or secrets.
-- A future signed-profile feature should use a maintained cryptographic library and a key-management process; do not treat a plain checksum as a signature.
+```bash
+git clone https://github.com/Alvandcode/APN-Manager.git
+cd APN-Manager
+./gradlew assembleDebug
+```
 
-## Current limitations / next development steps
-- Profile details are shown in-app, but the app cannot populate Android's APN editor automatically on ordinary devices.
-- No verified carrier database is bundled yet.
-- SIM-based auto-detection is deferred until permission behavior and privacy implications are validated across target devices.
-- Debug APK is for testing. A release APK should be signed with a private release key stored in GitHub Secrets, never committed to the repository.
+### 📥 Download the app
+1. Go to the [Releases](../../releases) page.
+2. Download `APN-Manager.apk` from the **`latest`** release.
+3. Install on a test device.
+4. Open the app → choose an `.apnpack` profile → confirm SIM carrier info if desired → open APN settings.
+
+### 🌐 Use the web panel
+The web panel is published via GitHub Pages from the `docs/` folder of the `main` branch:
+
+- **https://alvandcode.github.io/APN-Manager/**
+
+### 🤝 How to contribute / مشارکت
+- Fork the repository and open a Pull Request.
+- Keep changes focused; update both Persian and English strings.
+- Do not add permissions or network access without strong justification.
+- Update `apn-format/schema.json` and the app/web validation together.
+
+---
+
+## 📄 License
+See [LICENSE](LICENSE).
+
+---
+
+## 🤝 دعوت به مشارکت / Call for Contributions
+همکاری با شما برای تکمیل این پروژه بسیار ارزشمند است. اگر مشکلی دیدید، یا ایده‌ای برای ویژگی‌افزایی دارید، لطفاً **Pull Request** باز کنید. ما از هرگونه بازخورد، گزارش باگ و پیشنهاد بهره‌برداری خوشحال می‌شویم!
+
+---
+
+**⭐ Star this repository · ⬇️ Download latest APK · 🤝 Contribute · 📖 Read the docs**
