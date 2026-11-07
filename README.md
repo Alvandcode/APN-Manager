@@ -3,7 +3,7 @@
 Persian/English Android APN profile helper + static web profile builder.
 
 ## Current v1 scope
-- Android app (Kotlin + Jetpack Compose), Android 6.0+ (API 23+).
+- Android app (Kotlin + Jetpack Compose), supporting Android 7.0 (API 24) through Android 15 (API 35).
 - Import `.apnpack` JSON profiles through Android Sharesheet/file manager.
 - Validate profile structure and key fields locally.
 - Open Android APN settings for user-assisted registration.

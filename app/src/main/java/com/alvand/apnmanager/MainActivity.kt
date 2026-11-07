@@ -273,7 +273,7 @@ fun ApnManagerApp(incomingUri: Uri?, initialPersian: Boolean, initialDark: Boole
                         "This app does not write APN settings directly. Final saving must be completed in Android settings.",
                     style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                Text("APN Manager • v1.0.1", style = MaterialTheme.typography.labelSmall,
+                Text("APN Manager • v1.0.2", style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
