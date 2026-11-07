@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827"><title>APN Manager | پنل ساخت پروفایل</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div><span class="mark">A</span><div><h1>APN Manager</h1><p data-i18n="subtitle">سازنده و مدیریت پروفایل‌های اینترنت</p></div></div>
+<nav><button id="langBtn">EN</button><button id="themeBtn" aria-label="تغییر پوسته">◐</button></nav></header>
+<main>
+<section class="hero"><p class="eyebrow">PROFILE STUDIO</p><h2 data-i18n="title">پروفایل APN بساز و صادر کن</h2><p data-i18n="intro">اطلاعات اپراتور را وارد کن، اعتبارسنجی کن و فایل قابل انتقال بساز.</p></section>
+<section class="panel">
+<div class="section-head"><h3 data-i18n="details">مشخصات پروفایل</h3><span class="tag">APNPACK v1</span></div>
+<form id="profileForm">
+<label><span data-i18n="profileName">نام پروفایل</span><input id="name" required maxlength="80" placeholder="مثلاً اینترنت شخصی"></label>
+<label><span data-i18n="apnLabel">APN</span><input id="apn" required maxlength="100" data-i18n-ph="apnPh" placeholder="APN provided by carrier"></label>
+<div class="grid">
+<label><span data-i18n="mccLabel">MCC</span><input id="mcc" inputmode="numeric" maxlength="3" data-i18n-ph="mccPh" placeholder="3 digits"></label>
+<label><span data-i18n="mncLabel">MNC</span><input id="mnc" inputmode="numeric" maxlength="3" data-i18n-ph="mncPh" placeholder="2–3 digits"></label>
+</div>
+<label><span data-i18n="apnType">نوع APN</span><input id="apnType" value="default,supl"></label>
+<div class="grid">
+<label><span data-i18n="protocol">پروتکل</span><select id="protocol"><option>IPV4V6</option><option>IPV4</option><option>IPV6</option></select></label>
+<label><span data-i18n="auth">احراز هویت</span><select id="authType"><option>NONE</option><option>PAP</option><option>CHAP</option><option>PAP_OR_CHAP</option></select></label>
+</div>
+<div class="grid">
+<label><span data-i18n="proxy">پروکسی (اختیاری)</span><input id="proxy" maxlength="100"></label>
+<label><span data-i18n="port">پورت (اختیاری)</span><input id="port" inputmode="numeric" maxlength="5"></label>
+</div>
+<div class="actions"><button class="primary" type="submit" data-i18n="download">اعتبارسنجی و دانلود فایل</button><button type="button" id="sampleBtn" data-i18n="sample">نمونه خالی</button></div>
+<p id="message" role="status"></p>
+</form>
+</section>
+<section class="notice"><strong data-i18n="important">نکته مهم</strong><p data-i18n="notice">این فایل بسته اطلاعاتی APN Manager است، نه فایل نصب سیستمی اندروید. برای ثبت نهایی، اپلیکیشن یا تنظیمات گوشی لازم است. مقادیر اپراتور را از منبع رسمی تأیید کنید.</p></section>
+<footer>APN Manager · Local-first · No account required</footer>
+</main><script src="app.js"></script></body></html>
