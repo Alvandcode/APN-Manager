@@ -1,0 +1,36 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- No Android permissions are required: the SIM network code is read via
+         TelephonyManager.getSimOperator(), which needs no permission. -->
+    <application
+        android:allowBackup="false"
+        android:label="APN Manager"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.APNManager">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Primary association: the app's own profile mime type -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="application/vnd.apnmanager.profile+json" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+            </intent-filter>
+            <!-- Fallback for browsers/file managers that save the file as generic JSON -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="application/json" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

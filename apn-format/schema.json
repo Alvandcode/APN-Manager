@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "APN Manager Profile",
+  "type": "object",
+  "required": [
+    "format",
+    "version",
+    "profile"
+  ],
+  "properties": {
+    "format": {
+      "const": "apnpack"
+    },
+    "version": {
+      "const": 1
+    },
+    "profile": {
+      "type": "object",
+      "required": [
+        "name",
+        "apn"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "apn": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[A-Za-z0-9._-]+$"
+        },
+        "mcc": {
+          "type": "string",
+          "pattern": "^$|^\\d{3}$"
+        },
+        "mnc": {
+          "type": "string",
+          "pattern": "^$|^\\d{2,3}$"
+        },
+        "apnType": {
+          "type": "string",
+          "pattern": "^$|^[a-z][a-z0-9+]*(,[a-z][a-z0-9+]*)*$"
+        },
+        "protocol": {
+          "enum": [
+            "IPV4",
+            "IPV6",
+            "IPV4V6"
+          ]
+        },
+        "authType": {
+          "enum": [
+            "NONE",
+            "PAP",
+            "CHAP",
+            "PAP_OR_CHAP"
+          ]
+        },
+        "proxy": {
+          "type": "string",
+          "pattern": "^$|^[A-Za-z0-9.-]{1,100}$"
+        },
+        "port": {
+          "type": "string",
+          "pattern": "^$|^[1-9][0-9]{0,4}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

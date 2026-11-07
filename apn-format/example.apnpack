@@ -1,0 +1,15 @@
+{
+  "format": "apnpack",
+  "version": 1,
+  "profile": {
+    "name": "Example - replace with carrier values",
+    "apn": "REPLACE_WITH_OFFICIAL_APN",
+    "mcc": "",
+    "mnc": "",
+    "apnType": "default,supl",
+    "protocol": "IPV4V6",
+    "authType": "NONE",
+    "proxy": "",
+    "port": ""
+  }
+}
